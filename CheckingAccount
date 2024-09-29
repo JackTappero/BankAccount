@@ -1,0 +1,25 @@
+package bankAccount;
+
+public class CheckingAccount extends BankAccount {
+    private double interestRate;
+    private static final double OVERDRAFT_FEE = 30.0;
+
+    public CheckingAccount(String firstName, String lastName, int accountID, double interestRate) {
+        super(firstName, lastName, accountID);
+        this.interestRate = interestRate;
+    }
+
+    public void processWithdrawal(double amount) {
+        if (amount > getBalance()) {
+            double newBalance = getBalance() - amount - OVERDRAFT_FEE;
+            System.out.println("Overdraft Withdrawal: " + amount + " Overdraft Fee will be Applied: $30. New balance: " + newBalance);
+        } else {
+            withdrawal(amount);
+        }
+    }
+  
+    public void displayAccount() {
+        accountSummary();
+        System.out.println("Interest Rate: " + interestRate + "%");
+    }
+}
